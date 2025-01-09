@@ -13,9 +13,11 @@ def zones(ctx):
   pass
 
 @zones.command('list')
+@click.option('--name', '-n', required=True, help='Zone (Zone name (e.g. example.com))', type=str)
+@click.option('--status', '-s', required=True, help="Zone Status (Zone Status ('initializing', 'pending', 'active', 'moved'))", type=str)
 @click.pass_context
 def List(ctx):
   print(ctx.parent.parent.params)
   cf = cfclient.CFCLIClient()
-  #response = cf.cf.zones.list()
-  #print(response.result)
+  response = cf.cf.zones.list()
+  print(response.result)
