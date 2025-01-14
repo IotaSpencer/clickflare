@@ -1,12 +1,12 @@
 import click
-from cfcli.lazy_group import LazyGroup
 from cfcli import CFCLI
+from cfcli.lazy_group import LazyGroup
 ##
-from cfcli.clis import *
+# import clis.*
 def print_version(ctx, param, value):
     if not value or ctx.resilient_parsing:
         return
-    click.echo(f'version {CFCLI.VERSION}')
+    click.echo(f'Version {CFCLI.VERSION}')
     ctx.exit()
 
 
@@ -30,8 +30,9 @@ def print_version(ctx, param, value):
                 #  "cloudforce_one": "cfcli.clis.cloudforce_one.cloudforce_one",
                 #  "custom_certificates": "cfcli.clis.custom_certificates.custom_certificates",
                 #  "custom_hostnames": "cfcli.clis.custom_hostnames.custom_hostnames",
+
                 #  "client_certificates": "cfcli.clis.client_certificates.client_certificates",
-                #  "d1": "cfcli.clis.d1.d1",
+                                #  "d1": "cfcli.clis.d1.d1",
                 #  "diagnostics": "cfcli.clis.diagnostics.diagnostics",
                 #  "dns": "cfcli.clis.dns.dns",
                 #  "durable_objects": "cfcli.clis.durable_objects.durable_objects",
@@ -44,7 +45,7 @@ def print_version(ctx, param, value):
                 #  "iam": "cfcli.clis.iam.iam",
                 #  "images": "cfcli.clis.images.images",
                 #  "intel": "cfcli.clis.intel.intel",
-                "ips": "cfcli.clis.ips.ips",
+                 "ips": "cfcli.clis.ips.ips",
                 #  "kv": "cfcli.clis.kv.kv",
                 #  "load_balancers": "cfcli.clis.load_balancers.load_balancers",
                 #  "logpush": "cfcli.clis.logpush.logpush",
@@ -58,8 +59,8 @@ def print_version(ctx, param, value):
                 #  "ssl": "cfcli.clis.ssl.ssl",
                 #  "user": "cfcli.clis.user.user",
                 #  "waf": "cfcli.clis.waf.waf",
-                "zones": "cfcli.clis.zones.zones",
+                #  "zones": "cfcli.clis.zones.zones",
                  },
              help="A CLI for interacting with Cloudflare.")
-def cli(output: str):
+def cli():
     pass

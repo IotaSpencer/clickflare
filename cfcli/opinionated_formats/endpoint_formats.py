@@ -32,4 +32,4 @@ class EndpointFormats:
   
   @staticmethod
   def get_format_for_endpoint(endpoint, format):
-    
+    pass

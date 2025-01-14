@@ -1,4 +1,3 @@
-import os
 from cfcli import config
 from cloudflare import Cloudflare
 
