@@ -45,16 +45,27 @@ def List(ctx, zone, name, type, content, proxiable, proxied, ttl, locked, **kwar
   print(response)
   
 @zones_dns_records.command('add', help='Add a DNS record', short_help='Add a DNS record')
-@click.option('--zone', '-z', required=True, help='Zone (Zone name (e.g. example.com))', type=str)
+@click.option('--zone', '-z', required=True, help='Zone (Zone name (e.g. example.com))', type=str, prompt=True)
 @click.option('--name', '-n', required=True, help='Name (Record name (e.g. example.com))', type=str, prompt=True)
 @click.option('--type', '-t', required=True, help='Type (Record type (e.g. A, CNAME, MX, etc))', type=str, prompt=True)
 @click.option('--data', '-d', required=True, help='Data (Record data (e.g. 127.0.0.1))', type=str, prompt=True)
 @click.option('--ttl', '-l', required=True, prompt=True, help='TTL (Record TTL (e.g. 120, TTL must be between 60 and 86400 seconds, or 1 for Automatic.))', type=int)
 @click.option('--priority', '-p', required=False, help='Priority (Record priority (e.g. 10))', type=int)
-@click.option('--comment', '-m', required=False, help='Comment (Record comment (e.g. This is a comment))', type=str)
-@click.option('--proxied', '-x', required=False, help='Proxied (Whether the record is proxied)', type=bool)
-def add(zone, name, type, data, ttl, priority, proxied):
+@click.option('--comment', '-m', required=False, help='Comment (Record comment (e.g. This is a comment))', type=str, prompt=True)
+@click.option('--proxied', '-x', required=False, help='Proxied (Whether the record should be proxied)', type=bool)
+@click.option('--tags', metavar="TAG",required=False, default=None, multiple=True, help='Tags (Record tags (e.g. --tags tag1:value1 --tags tag2:value2))', type=str)
+def add(zone, name, type, data, ttl, priority, proxied, comment, tags, **kwargs):
   zone_id = get_zone_id(zone_name=zone)
   cf = cfclient.CFCLIClient()
-  response = cf.cf.dns.records.create(zone_id=zone_id, name=name, type=type, content=data, ttl=ttl, priority=priority, proxied=proxied)
+  response = cf.cf.dns.records.create(zone_id=zone_id, comment=comment, name=name, type=type, content=data, ttl=ttl, priority=priority, proxied=proxied, tags=tags, extra_query=kwargs)
   print(response)
+  
+@zones_dns_records.command('rem', help='Remove a DNS record', short_help='Remove a DNS record')
+@click.option('--zone', '-z', required=True, help='Zone (Zone name (e.g. example.com))', type=str, prompt=True)
+@click.option('--record-id', '-r', required=True, help='Record ID (Record ID (e.g. 1234567890abcdef1234567890abcdef))', type=str, prompt=True)
+def rem(zone, record_id):
+  zone_id = get_zone_id(zone_name=zone)
+  cf = cfclient.CFCLIClient()
+  response = cf.cf.dns.records.delete(zone_id=zone_id, dns_record_id=record_id)
+  print(response)
+  
