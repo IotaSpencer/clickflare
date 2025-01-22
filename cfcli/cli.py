@@ -14,7 +14,7 @@ def print_version(ctx, param, value):
 @click.option('--output', '-o', default='yaml', help='Output format', type=click.Choice(['table', 'yaml'], case_sensitive=False))
 @click.group(cls=LazyGroup,
              lazy_subcommands={
-                #  "accounts": "cfcli.clis.accounts.accounts",
+                "accounts": "cfcli.clis.accounts.accounts",
                 #  "acm": "cfcli.clis.acm.acm",
                 #  "addressing": "cfcli.clis.addressing.addressing",
                 #  "ai_gateway": "cfcli.clis.ai_gateway.ai_gateway",
@@ -59,8 +59,8 @@ def print_version(ctx, param, value):
                 #  "ssl": "cfcli.clis.ssl.ssl",
                 #  "user": "cfcli.clis.user.user",
                 #  "waf": "cfcli.clis.waf.waf",
-                #  "zones": "cfcli.clis.zones.zones",
+                "zones": "cfcli.clis.zones.zones",
                  },
              help="A CLI for interacting with Cloudflare.")
-def cli():
+def cli(output):
     pass

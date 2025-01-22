@@ -1,11 +1,11 @@
-__all__ = ['zones', 'zones_dns_records', 'ips']
-from . import ips
-# import account
+__all__ = ['zones', 'zones_dns_records', 'ips', 'accounts']
+from . import accounts
 # import custom_hostnames
 # import d1
 # import diagnostics
 # import email_routing
 # import firewall
+from . import ips
 # import logs
 # import magic_network_monitoring
 # import magic_transit
@@ -18,6 +18,5 @@ from . import ips
 # import tls_client_auth
 # import user
 # import waf
-
 from . import zones
 from . import zones_dns_records
