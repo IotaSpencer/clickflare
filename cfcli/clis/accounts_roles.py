@@ -29,7 +29,3 @@ def list_roles(account_id):
   response = cf.cf.accounts.roles.list(account_id=account_id)
   click.echo(response)
   
-
-
-if __name__ == '__main__':
-  accounts_roles()
