@@ -1,13 +1,13 @@
 import click
-from cfcli import cfclient
-from cfcli.lazy_group import LazyGroup
+from clickflare import cfclient
+from clickflare.lazy_group import LazyGroup
 
 @click.group(cls=LazyGroup,
   lazy_subcommands={
-    "list": "cfcli.clis.accounts_subscriptions.list_subscriptions",
-    "show": "cfcli.clis.accounts_subscriptions.show",
-    "update": "cfcli.clis.accounts_subscriptions.update",
-    "delete": "cfcli.clis.accounts_subscriptions.delete"
+    "list": "clickflare.clis.accounts_subscriptions.list_subscriptions",
+    "show": "clickflare.clis.accounts_subscriptions.show",
+    "update": "clickflare.clis.accounts_subscriptions.update",
+    "delete": "clickflare.clis.accounts_subscriptions.delete"
   })
 def accounts_subscriptions():
   """Manage Cloudflare account subscriptions."""
@@ -18,7 +18,7 @@ def accounts_subscriptions():
 @click.option('--subscription-id', '-s', required=True, help='Subscription ID')
 def show(account_id, subscription_id):
   """Get details of a specific subscription in an account."""
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.accounts.subscriptions.get(account_id=account_id, subscription_id=subscription_id)
   click.echo(response)
 
@@ -26,7 +26,7 @@ def show(account_id, subscription_id):
 @click.option('--account-id', '-i', required=True, help='Account ID')
 def list_subscriptions(account_id):
   """List all subscriptions in an account."""
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.accounts.subscriptions.list(account_id=account_id)
   click.echo(response)
 
@@ -38,7 +38,7 @@ if __name__ == '__main__':
   @click.option('--frequency', '-f', required=True, help='Subscription frequency')
   def update(account_id: str, subscription_identifier: str, price_id: str, frequency: str, seats: int):
     """Update a subscription in an account."""
-    cf = cfclient.CFCLIClient()
+    cf = cfclient.ClickFlareClient()
     data = {
       "price_id": price_id,
       "frequency": frequency,
@@ -52,11 +52,11 @@ if __name__ == '__main__':
   @click.option('--subscription-identifier', '-s', required=True, help='Subscription Identifier')
   def delete(account_id: str, subscription_identifier: str):
     """Delete a subscription from an account."""
-    cf = cfclient.CFCLIClient()
+    cf = cfclient.ClickFlareClient()
     response = cf.cf.accounts.subscriptions.delete(account_id=account_id, subscription_identifier=subscription_identifier)
     click.echo(response)
     """Delete a subscription from an account."""
-    cf = cfclient.CFCLIClient()
+    cf = cfclient.ClickFlareClient()
     response = cf.cf.accounts.subscriptions.delete(account_id=account_id, subscription_identifier=subscription_identifier)
     click.echo(response)
   

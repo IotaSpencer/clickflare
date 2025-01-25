@@ -1,11 +1,11 @@
 import click
-from cfcli import cfclient
+from clickflare import cfclient
 
 @click.command()
 @click.option('--jdcloud', '-j', required=False, help="Whether to include JD Cloud IPs", type=bool)
 @click.pass_context
 def ips(ctx, jdcloud):
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   if jdcloud:
     response = cf.cf.ips.list(networks='jdcloud')
   else:

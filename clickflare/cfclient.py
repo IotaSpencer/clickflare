@@ -1,7 +1,7 @@
-from cfcli import config
+from clickflare import config
 from cloudflare import Cloudflare
 
-class CFCLIClient:
+class ClickFlareClient:
 
   def __init__(self):
     self.cf = Cloudflare(api_token=config.Config().token)

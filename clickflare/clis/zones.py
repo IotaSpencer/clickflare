@@ -1,11 +1,11 @@
 import click
-from cfcli import cfclient
+from clickflare import cfclient
 
-from cfcli.lazy_group import LazyGroup
+from clickflare.lazy_group import LazyGroup
 
 @click.group(cls=LazyGroup,
   lazy_subcommands={
-    "dns_records": "cfcli.clis.zones_dns_records.zones_dns_records",
+    "dns_records": "clickflare.clis.zones_dns_records.zones_dns_records",
   })
 
 @click.pass_context
@@ -18,6 +18,6 @@ def zones(ctx):
 @click.pass_context
 def List(ctx):
   print(ctx.parent.parent.params)
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.zones.list()
   print(response.result)

@@ -1,11 +1,11 @@
 import click
-from cfcli import cfclient
-from cfcli.lazy_group import LazyGroup
+from clickflare import cfclient
+from clickflare.lazy_group import LazyGroup
 
 @click.group(cls=LazyGroup,
   lazy_subcommands={
-    "list": "cfcli.clis.accounts_roles.list_roles",
-    "show": "cfcli.clis.accounts_roles.show",
+    "list": "clickflare.clis.accounts_roles.list_roles",
+    "show": "clickflare.clis.accounts_roles.show",
   })
 def accounts_roles():
   """Manage Cloudflare account roles."""
@@ -16,7 +16,7 @@ def accounts_roles():
 @click.option('--role-id', '-r', required=True, help='Role ID')
 def show(account_id, role_id):
   """Get details of a specific role in an account."""
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.accounts.roles.get(account_id=account_id, role_id=role_id)
   click.echo(response)
 
@@ -25,7 +25,7 @@ def show(account_id, role_id):
 @click.option('--api-token', required=True, help='Cloudflare API token')
 def list_roles(account_id):
   """List all roles in an account."""
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.accounts.roles.list(account_id=account_id)
   click.echo(response)
   

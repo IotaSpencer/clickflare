@@ -1,4 +1,4 @@
-from cfcli import cfclient
+from clickflare import cfclient
 
 
 def get_zone_id(zone_name):
@@ -13,6 +13,6 @@ def get_zone_id(zone_name):
     Exception: If there is an error in retrieving the zone information.
   """
   
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.zones.list(match='all', name=zone_name)
   return response.result[0].id

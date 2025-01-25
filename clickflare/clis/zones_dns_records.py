@@ -1,6 +1,6 @@
 import click
-from cfcli import cfclient
-from cfcli.helpers import get_zone_id
+from clickflare import cfclient
+from clickflare.helpers import get_zone_id
 
 @click.group()
 @click.pass_context
@@ -40,7 +40,7 @@ def List(ctx, zone, name, type, content, proxiable, proxied, ttl, locked, **kwar
   print(kwargs)
   zone_id = get_zone_id(zone_name=zone)
   print(zone_id)
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.dns.records.list(zone_id=zone_id, extra_query=kwargs)
   print(response)
   
@@ -56,7 +56,7 @@ def List(ctx, zone, name, type, content, proxiable, proxied, ttl, locked, **kwar
 @click.option('--tags', metavar="TAG",required=False, default=None, multiple=True, help='Tags (Record tags (e.g. --tags tag1:value1 --tags tag2:value2))', type=str)
 def add(zone, name, type, data, ttl, priority, proxied, comment, tags, **kwargs):
   zone_id = get_zone_id(zone_name=zone)
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.dns.records.create(zone_id=zone_id, comment=comment, name=name, type=type, content=data, ttl=ttl, priority=priority, proxied=proxied, tags=tags, extra_query=kwargs)
   print(response)
   
@@ -65,7 +65,7 @@ def add(zone, name, type, data, ttl, priority, proxied, comment, tags, **kwargs)
 @click.option('--record-id', '-r', required=True, help='Record ID (Record ID (e.g. 1234567890abcdef1234567890abcdef))', type=str, prompt=True)
 def rem(zone, record_id):
   zone_id = get_zone_id(zone_name=zone)
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.dns.records.delete(zone_id=zone_id, dns_record_id=record_id)
   print(response)
   

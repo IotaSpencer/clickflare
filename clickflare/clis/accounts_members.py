@@ -1,17 +1,17 @@
 import click
-from cfcli import cfclient
+from clickflare import cfclient
 
-import cfcli
+import clickflare
 
-from cfcli.lazy_group import LazyGroup
+from clickflare.lazy_group import LazyGroup
 
 @click.group(name="members", cls=LazyGroup,
   lazy_subcommands={
-    "list": "cfcli.clis.accounts_members.accounts_members.list",
-    "add": "cfcli.clis.accounts_members.accounts_members.add",
-    "delete": "cfcli.clis.accounts_members.accounts_members.delete",
-    "show": "cfcli.clis.accounts_members.accounts_members.show",
-    "update": "cfcli.clis.accounts_members.accounts_members.update",
+    "list": "clickflare.clis.accounts_members.accounts_members.list",
+    "add": "clickflare.clis.accounts_members.accounts_members.add",
+    "delete": "clickflare.clis.accounts_members.accounts_members.delete",
+    "show": "clickflare.clis.accounts_members.accounts_members.show",
+    "update": "clickflare.clis.accounts_members.accounts_members.update",
   }, help="Manage Cloudflare Account members")
 def accounts_members():
   pass
@@ -20,7 +20,7 @@ def accounts_members():
 @click.option('--account-id', '-a', required=True, help="Account ID", type=str)
 @click.option('--member-id', '-m', required=True, help="Member ID", type=str)
 def delete(account_id, member_id):
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.accounts.members.delete(account_id=account_id, member_id=member_id)
   print(response)
   
@@ -28,7 +28,7 @@ def delete(account_id, member_id):
 @click.option('--account-id', '-a', required=True, help="Account ID", type=str)
 @click.option('--member-id', '-m', required=True, help="Member ID", type=str)
 def show(account_id, member_id):
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.accounts.members.get(account_id=account_id, member_id=member_id)
   print(response)
   
@@ -37,6 +37,6 @@ def show(account_id, member_id):
 @click.option('--member-id', '-m', required=True, help="Member ID", type=str)
 @click.option('--role-ids', '-r', required=True, help="Role ID", type=str, multiple=True)
 def update(account_id, member_id, role_ids):
-  cf = cfclient.CFCLIClient()
+  cf = cfclient.ClickFlareClient()
   response = cf.cf.accounts.members.update(account_id=account_id, member_id=member_id, roles=role_ids)
   print(response)
