@@ -10,7 +10,9 @@ maintainers = [
 keywords = ["cloudflare", "cli", "python"]
 dependencies = [
   "click>=8.1.8",
-  "cloudflare>=3.1.1",
+  "cloudflare>=4.0.0",
+  "terminaltables>=3.1.10",
+  "toml>=0.10.2",
 ]
 
 description = "A command line interface for Cloudflare"
@@ -42,7 +44,7 @@ path = "clickflare/__init__.py"
 pattern = "  VERSION = '(?P<version>[^']+)'"
 
 [project.scripts]
-cfcli = "clickflare:cli.cli"
+clickflare = "clickflare:cli.cli"
 
 [tool.ruff.format]
 quote-style = "double"

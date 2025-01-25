@@ -1,3 +1,4 @@
 click==8.1.8
-cloudflare==3.1.1
-terminaltables==3.1.0
+cloudflare==4.0.0
+terminaltables==3.1.10
+toml==0.10.2
